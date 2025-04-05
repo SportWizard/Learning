@@ -2,7 +2,10 @@
 Machine learning is subfield of Artificial Intelligence that learns from training data
 
 # Topics
-Basics:
+Prerequisites:
+- [[Calculus]]
+- [[Linear Algebra]]
+Introduction:
 - [[Simply vs Complex Models]]
 - [[Under-fitting vs Over-fitting]]
 - [[Bias-Variance Tradeoff]]
@@ -19,6 +22,10 @@ Objective/loss functions:
 - [[Mean Absolute Error]]
 - [[Mean Square Error]]
 - [[Minimum Classification Error]]
+Optimization algorithms:
+- [[Stochastic Gradient Descent]]
+- [[Mini-batch Stochastic Gradient Descent]]
+- [[Batch Gradient Descent]]
 Linear models:
 - [[Linear Regression]]
 - [[Ridge Regression]]
