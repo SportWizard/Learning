@@ -4,4 +4,5 @@ A branch of math that deals with continuous change and how things change over ti
 # Topics
 - [[Limit]]
 - [[Derivative]]
+- [[Gradient Descent]]
 - [[Integral]]

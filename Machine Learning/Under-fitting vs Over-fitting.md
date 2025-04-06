@@ -1,4 +1,4 @@
-# What is under-fitting vs over-fitting
+# What is under-fitting and over-fitting
 Under-fitting and over-fitting are concepts of [[Machine Learning]] that describe how well the model captures the training data
 
 # Under-fitting

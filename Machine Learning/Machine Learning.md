@@ -6,6 +6,7 @@ Prerequisites:
 - [[Calculus]]
 - [[Linear Algebra]]
 Introduction:
+- [[Regression vs Classification]]
 - [[Simply vs Complex Models]]
 - [[Under-fitting vs Over-fitting]]
 - [[Bias-Variance Tradeoff]]

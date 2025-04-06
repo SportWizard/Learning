@@ -1,4 +1,4 @@
-# What is simply vs complex models?
+# What is simply and complex models?
 Simply and complex models are concepts in [[Machine Learning]]. It describe the complexity of the model
 
 # Simple models
