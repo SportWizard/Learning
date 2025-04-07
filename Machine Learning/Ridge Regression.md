@@ -1,8 +1,16 @@
 # What is ridge regression?
-Ridge regression is a linear model that uses [[Supervised Learning]] to train. It is an extension of [[Linear Regression]] that incorporates regularization into its objective/loss function to prevent over-fitting
+Ridge regression is a linear model in [[Machine Learning]] that uses [[Supervised Learning]] to train. It is an extension of [[Linear Regression]] that incorporates regularization into its objective/loss function to prevent over-fitting
 
 # What problem is ridge regression used for?
 Ridge regression is primary used for regression problem. It can also do binary classification problem, but not great for it
+
+# How does ridge regression work?
+Ridge regression work similar to the equation $y = mx + b$, where $m$ in this is the weight vector, $\vec{w}$ and $b$ is the bias vector, $\vec{b}$.
+
+**Training:**
+	 During training, it uses gradient descent to adjust its weight vector such that it achieve the lowest loss
+**Prediction:**
+	Ridge regression uses $\vec{w}^\intercal \vec{x}$ to make its prediction
 
 # Equation
 
@@ -93,16 +101,15 @@ def ridge_regression_gd(X, y, op):
             w -= lr * w_grad / X_batch.shape[0] # mini-batch SGD uses the average gradient of the mini-batch
 
         # Learning curves
-        w_errors[epoch] = obj_func(w, X_train, y_train) # Only calculate MSE by setting lambda to 0
+        w_errors[epoch] = obj_func(w, X, y) # Only calculate MSE by setting lambda to 0
 
         # Update learning rate (keep annealing_rate % of lr)
         lr *= op.annealing_rate
-    
+
     return w,  w_errors
 
 # Ridge regression
 rigde_op = Optimizer(lr=0.02, annealing_rate=0.99, batch_size=50, max_epochs=20, lam=1) # 0 <= lambda <= posititve infinity
-
 ridge_w, ridge_w_errors = ridge_regression_gd(X, y, rigde_op)
 
 ridge_predict = X @ ridge_w
@@ -110,7 +117,6 @@ ridge_predict = X @ ridge_w
 # Linear regression
 # Since lam is not set to a value, meaning lam=0. Then this optimizer acts as a linear regression since the regularization control nothing to the objective function
 linear_op = Optimizer(lr=0.02, annealing_rate=0.99, batch_size=50, max_epochs=20)
-
 linear_w, linear_w_errors = ridge_regression_gd(X, y, linear_op)
 
 linear_predict = X @ linear_w
@@ -121,9 +127,7 @@ linear_predict = X @ linear_w
 import numpy as np
 
 lam = 1.0
+w = np.linalg.inv(X.T @ X + lam * np.identity(X.shape[1])) @ X.T @ y
 
-w = np.linalg.inv(X_train.T @ X_train + lam * np.identity(X_train.shape[1])) @ X_train.T @ y_train
-
-training_predict = X_train @ w
-test_predict = X_test @ w
+predict = X @ w
 ```

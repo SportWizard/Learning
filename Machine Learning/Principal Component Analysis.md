@@ -25,3 +25,17 @@ Note: A contains the top $k$ eigenvalues, where the top of the matrix captures t
 
 ![[pca.png]]
 ![[pca-chart.png]]
+
+# Code
+##### PCA with Scikit-learn
+```python
+from sklearn.decomposition import PCA
+
+pca = PCA(n_components=2) # n_components is the number of principle components to keep
+
+pca_X = pca.fit_transform(X)
+
+# or
+# pca.fit(X)
+# pca_X = pca.transform(X)
+```

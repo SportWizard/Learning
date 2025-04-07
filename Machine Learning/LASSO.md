@@ -1,8 +1,16 @@
 # What is LASSO?
-LASSO is a linear model that uses [[Supervised Learning]] to train. It is an extension of [[Linear Regression]] that incorporates regularization into its objective/loss function to prevent over-fitting
+LASSO is a linear model in [[Machine Learning]] that uses [[Supervised Learning]] to train. It is an extension of [[Linear Regression]] that incorporates regularization into its objective/loss function to prevent over-fitting
 
 # What problem is LASSO used for?
 LASSO is primary used for regression problem. It can also do binary classification problem, but not great for it
+
+# How does LASSO work?
+LASSO work similar to the equation $y = mx + b$, where $m$ in this is the weight vector, $\vec{w}$ and $b$ is the bias vector, $\vec{b}$.
+
+**Training:**
+	 During training, it uses gradient descent to adjust its weight vector such that it achieve the lowest loss
+**Prediction:**
+	LASSO uses $\vec{w}^\intercal \vec{x}$ to make its prediction
 
 # Equation
 
@@ -98,19 +106,15 @@ def lasso_gd(X, y, op):
     return w, w_errors
 
 # LASSO
-lasso_op = Optimizer(lr=lr, annealing_rate=annealing_rate, batch_size=batch_size, max_epochs=max_epochs, lam=3.0) # 0 <= lambda <= posititve infinity
-
+lasso_op = Optimizer(lr=0.025, annealing_rate=0.99, batch_size=batch_size, max_epochs=20, lam=3.0) # 0 <= lambda <= posititve infinity
 lasso_w, lasso_w_errors = lasso_gd(X, y, lasso_op)
 
 lasso_predict = X @ lasso_w
-lasso_predict = X_test @ lasso_w
 
 # Linear regression
 # Since lam is not set to a value, meaning lam=0. Then this optimizer acts as a linear regression since the regularization control nothing to the objective function
 linear_op = Optimizer(lr=0.025, annealing_rate=0.99, batch_size=20, max_epochs=50)
-
 linear_w, linear_w_errors = lasso_gd(X, y, linear_op)
 
-linear_training_predict = X_train @ linear_w
-linear_test_predict = X_test @ linear_w
+linear_predict = X @ linear_w
 ```

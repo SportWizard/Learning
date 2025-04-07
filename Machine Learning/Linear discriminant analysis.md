@@ -23,3 +23,17 @@ More than two classes:
 - Apply $\frac{(\mu_1 - \mu_2)^2 + (\mu_1 - \mu_3)^2 + \cdots}{s_1^2 + s_2^2 + s_3^2 + \cdots}$
 
 ![[lda.png]]
+
+# Code
+##### LDA with Scikit-learn
+```python
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+lda = LinearDiscriminantAnalysis(n_components=2) # n_components is the number of principle components to keep
+
+lda_X = lda.fit_transform(X, y)
+
+# or
+# lda.fit(X)
+# lda_X = lda.transform(X)
+```

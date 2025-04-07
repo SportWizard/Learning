@@ -1,10 +1,10 @@
 # What is K-nearest neighbours?
 K-nearest neighbours (KNN) is a [[Supervised Learning]] algorithm used for classification and regression tasks. It makes prediction based on its k nearest neighbours
 
-# How it works
+# How KNN works
 **Training:**
 	Map the inputs with the labels (this is already done when the data is given)
-**Predict:**
+**Prediction:**
 	Find the k nearest neighbours of current data sample using metrics (Euclidean distance, Hamming distance, Manhattan distance), and classify it the same as the most occurring class
 
 ```python

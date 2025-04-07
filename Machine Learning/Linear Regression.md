@@ -1,8 +1,16 @@
 # What is linear regression?
-Linear regression is a linear model that uses [[Supervised Learning]] to train
+Linear regression is a linear model in [[Machine Learning]] that uses [[Supervised Learning]] to train
 
 # What problem is linear regression used for?
 Linear regression is primary used for regression problem. It can also do binary classification problem, but not great for it
+
+# How does linear regression work?
+Linear regression work similar to the equation $y = mx + b$, where $m$ in this is the weight vector, $\vec{w}$ and $b$ is the bias.
+
+**Training:**
+	 During training, it uses gradient descent to adjust its weight vector such that it achieve the lowest loss
+**Prediction:**
+	Linear regression uses $\vec{w}^\intercal \vec{x}$ to make its prediction
 
 # Equation
 $$
@@ -64,7 +72,7 @@ def obj_func(w, X, y):
 def linear_regression_gd(X, y, op):
 	n = X.shape[0] # number of samples
 	w = jnp.zeros(X.shape[1]) # initialization
-	
+
 	lr = op.lr
 	errors = np.zeros(op.max_epochs)
 	for epoch in range(op.max_epochs):
@@ -72,15 +80,18 @@ def linear_regression_gd(X, y, op):
 		for batch_start in range(0, n, op.batch_size):
 			X_batch = X[indices[batch_start:batch_start + op.batch_size]]
 			y_batch = y[indices[batch_start:batch_start + op.batch_size]]
-	
-		# compute gradients via auto-grad for a whole mini-batch
-		w_grad = grad(obj_func)(w, X_batch, y_batch)
+
+			# compute gradients via auto-grad for a whole mini-batch
+			w_grad = grad(obj_func)(w, X_batch, y_batch)
 		
-		w -= lr * w_grad / X_batch.shape[0]
-		
+			w -= lr * w_grad / X_batch.shape[0]
+
+		# Learning curves
 		errors[epoch] = obj_func(w, X, y)
+
+		# Update learning rate (keep annealing_rate % of lr)
 		lr *= op.annealing_rate
-	
+
 	return w, np.array(errors)
 
 # Linear regression
