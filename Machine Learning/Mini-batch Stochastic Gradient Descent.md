@@ -1,5 +1,5 @@
 # What is mini-batch stochastic gradient descent
-Mini-batch stochastic gradient descent (min-batch SGD) uses [[Gradient Descent]] to optimize the function, $arg \; min_{x} f(x)$ (arg means continuously). It does the same thing as SGD but with mini-batch instead of a single data sample
+Mini-batch stochastic gradient descent (min-batch SGD) uses [[Gradient Descent]] to optimize the function, $\vec{w}^* = \arg \underset{\vec{w}}{\min} f_\vec{w}(\vec{x})$ (arg means continuously). It does the same thing as SGD but with mini-batch instead of a single data sample
 
 # How it work?
 - Randomly shuffle all training data (only need to shuffle the index during coding)
@@ -10,18 +10,23 @@ Mini-batch stochastic gradient descent (min-batch SGD) uses [[Gradient Descent]]
 - Repeat
 # Equation
 $$
-W^* = W - lr \frac{\sum_{x \in \text{mini-batch}} \nabla f_W(x)}{\text{size of mini-batch}}
+\vec{w}^* = \vec{w} - lr \frac{1}{\left| B \right|} \sum_{\vec{x} \in B} \nabla f_\vec{w}(\vec{x})
 $$
-$W$ is the weights
-$W^*$ is the updated weights
 $lr$ is the learning rate (determine the step size)
-$\nabla f(W)$ is the gradient
+$\vec{w}$ is the weights
+$\vec{w}^*$ is the updated weights
+$\vec{x} \in B$ is the inputs
+$\nabla f_\vec{w}(\vec{x})$ is the gradient
+$B$ is the mini-batch
+$\left| B \right|$ is the number of data samples in the mini-batch
+___
+The equation calculates every input in the mini-batch's gradient and sums it. Then, it divides it by the number of inputs in the mini-batch to calculate the average gradient. Next, it applies the learning rate (step size). Lastly, it is used to subtract the current weight vector since applying negative converts gradient ascent to gradient descent
 
 # Pros
 - Fast training when there is a fair large amount of data samples
 
 # Cons
-- Final computed weight, $W^*$ will be close but not exact
+- Final computed weight, $\vec{w}^*$ will be close but not exact
 
 ```python
 import numpy as np

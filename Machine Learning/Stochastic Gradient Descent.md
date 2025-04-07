@@ -1,5 +1,5 @@
 # What is stochastic gradient descent?
-Stochastic gradient descent (SGD) uses [[Gradient Descent]] to optimize the function, $arg \; min_{x} f(x)$ (arg means continuously)
+Stochastic gradient descent (SGD) uses [[Gradient Descent]] to optimize the function, $\arg \underset{\vec{w}}{\min} f_\vec{w}(\vec{x})$ (arg means continuously)
 
 # How it work?
 - Randomly shuffle all training data (only need to shuffle the index during coding)
@@ -9,12 +9,15 @@ Stochastic gradient descent (SGD) uses [[Gradient Descent]] to optimize the func
 - Repeat
 # Equation
 $$
-W^* = W - lr \nabla f_W(x)
+\vec{w}^* = \vec{w} - lr \nabla f_\vec{w}(\vec{x})
 $$
-$W$ is the weights
-$W^*$ is the updated weights
 $lr$ is the learning rate (determine the step size)
-$\nabla f(W)$ is the gradient
+$\vec{w}$ is the weights
+$\vec{w}^*$ is the updated weights
+$\vec{x} \in B$ is the inputs
+$\nabla f_\vec{w}(\vec{x})$ is the gradient
+___
+The equation calculates the input's gradient and applies the learning rate (step size). Then, it is used to subtract the current weight vector since applying negative converts gradient ascent to gradient descent
 
 # Pros
 - Fast training when there is a large amount of data samples

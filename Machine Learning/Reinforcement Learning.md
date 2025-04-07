@@ -1,5 +1,2 @@
 # What is reinforcement learning?
 Reinforcement learning is a type of [[Machine Learning]] that uses feedback as reward or punishment to train the model. These feedback are collected and used in real-time
-
-**Models**:
-- 

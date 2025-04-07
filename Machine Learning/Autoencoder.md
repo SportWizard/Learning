@@ -9,9 +9,11 @@ Autoencoder is an architecture and technique used in [[Machine Learning]] that i
 
 # Objective/loss function
 $$
-\|\hat{X} - X\|
+\vec{w}^* = \arg \underset{\vec{w}}{\min} \|\hat{X} - X\|
 $$
-$\hat{X}$: Reconstructed data
-$X$: True data
+$\hat{X} \in \mathbb{R}^{n \times m}$ is the reconstructed data
+$X \in \mathbb{R}^{n \times m}$ is the true data
+___
+The objective/loss function is used to calculate the difference between the reconstructed data and the true data
 
 ![[autoencoder.png]]

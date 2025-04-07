@@ -8,5 +8,7 @@ Negative value (angle > $90\degree$): Two vector's direction are opposite to eac
 
 # Equation
 $$
-V \cdot U = ||V|| \; ||U|| \; \cos \theta
+\vec{v} \cdot \vec{u} = ||\vec{v}|| \; ||\vec{u}|| \; \cos \theta
 $$
+$\vec{v} \in \mathbb{R}^n$
+$\vec{u} \in \mathbb{R}^n$

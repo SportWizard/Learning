@@ -5,11 +5,12 @@ Machine learning is subfield of Artificial Intelligence that learns from trainin
 Prerequisites:
 - [[Calculus]]
 - [[Linear Algebra]]
-Introduction:
+Fundamentals:
 - [[Regression vs Classification]]
 - [[Simply vs Complex Models]]
 - [[Under-fitting vs Over-fitting]]
 - [[Bias-Variance Tradeoff]]
+- [[Backpropagation]]
 Feature extraction:
 - [[Principal Component Analysis]]
 - [[Linear discriminant analysis]]

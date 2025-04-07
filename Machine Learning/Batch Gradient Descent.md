@@ -1,5 +1,5 @@
 # What is batch gradient descent
-Batch gradient descent (BGD) uses [[Gradient Descent]] to optimize the function, $arg \; min_{x} f(x)$ (arg means continuously)
+Batch gradient descent (BGD) uses [[Gradient Descent]] to optimize the function, $\vec{w}^* = \arg \underset{\vec{w}}{\min} f_\vec{w}(\vec{x})$ (arg means continuously)
 
 # How it work?
 - Uses all the training data to calculate the gradient of the objective/loss function with the current weights and calculates the average
@@ -8,15 +8,20 @@ Batch gradient descent (BGD) uses [[Gradient Descent]] to optimize the function,
 - Repeat
 # Equation
 $$
-W^* = W - lr \frac{\sum_{x \in \text{batch}} \nabla f_W(x)}{\text{size of batch}}, \text{batch} = \text{entire data samples}
-$$ 
-$W$ is the weights
-$W^*$ is the updated weights
+\vec{w}^* = \vec{w} - lr \frac{1}{B} \sum_{\vec{x} \in B} \nabla f_\vec{w}(\vec{x})
+$$
 $lr$ is the learning rate (determine the step size)
-$\nabla f(W)$ is the gradient
+$\vec{w}$ is the weights
+$\vec{w}^*$ is the updated weights
+$\vec{x} \in B$ is the inputs
+$\nabla f_\vec{w}(\vec{x})$ is the gradient
+$B$ is the batch (batch = entire dataset)
+$\left| B \right|$ is the number of data samples in the mini-batch
+___
+The equation calculates every input in the batch's gradient and sums it. Then, it divides it by the number of inputs in the batch to calculate the average gradient. Next, it applies the learning rate (step size). Lastly, it is used to subtract the current weight vector since applying negative converts gradient ascent to gradient descent
 
 # Pros
-- Final computed weight, $W^*$ will be accurate (preferred for small data samples)
+- Final computed weight, $\vec{w}^*$ will be accurate (preferred for small data samples)
 
 # Cons
 - Slow for large data samples
