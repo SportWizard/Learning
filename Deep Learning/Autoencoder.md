@@ -1,5 +1,5 @@
 # What is autoencoder?
-Autoencoder is an architecture and technique used in [[Machine Learning]] that implements non-linear dimension reduction on data samples using neural network
+Autoencoder is an architecture and technique used in [[Deep Learning]] that implements non-linear dimension reduction on data samples using neural network
 
 # How it works?
 - Uses an encoder (created using [[Fully Connected Neural Network]]) to reduce the dimension of the data

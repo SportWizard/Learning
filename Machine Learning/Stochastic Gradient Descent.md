@@ -9,9 +9,9 @@ Stochastic gradient descent (SGD) uses [[Gradient Descent]] to optimize the func
 - Repeat
 # Equation
 $$
-\vec{w}^* = \vec{w} - lr \nabla f_\vec{w}(\vec{x})
+\vec{w}^* = \vec{w} - \alpha \nabla f_\vec{w}(\vec{x})
 $$
-$lr$ is the learning rate (determine the step size)
+$\alpha$ is the learning rate (determine the step size)
 $\vec{w}$ is the weights
 $\vec{w}^*$ is the updated weights
 $\vec{x} \in B$ is the inputs

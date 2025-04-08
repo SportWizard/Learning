@@ -10,9 +10,9 @@ Mini-batch stochastic gradient descent (min-batch SGD) uses [[Gradient Descent]]
 - Repeat
 # Equation
 $$
-\vec{w}^* = \vec{w} - lr \frac{1}{\left| B \right|} \sum_{\vec{x} \in B} \nabla f_\vec{w}(\vec{x})
+\vec{w}^* = \vec{w} - \alpha \frac{1}{\left| B \right|} \sum_{\vec{x} \in B} \nabla f_\vec{w}(\vec{x})
 $$
-$lr$ is the learning rate (determine the step size)
+$\alpha$ is the learning rate (determine the step size)
 $\vec{w}$ is the weights
 $\vec{w}^*$ is the updated weights
 $\vec{x} \in B$ is the inputs

@@ -22,6 +22,22 @@ More than two classes:
 - Minimize the "scatter" (the distance between data of the same class)
 - Apply $\frac{(\mu_1 - \mu_2)^2 + (\mu_1 - \mu_3)^2 + \cdots}{s_1^2 + s_2^2 + s_3^2 + \cdots}$
 
+# Equation
+LDA transformation:
+- (Single data sample - vector):
+$$
+\vec{y} = A \vec{x}
+$$
+- (All data samples - matrix):
+$$
+Y = A X
+$$
+$\vec{x} \in \mathbb{R}^n$; $X \in \mathbb{R}^{n \times m}$ is the input(s)
+$\vec{y} \in \mathbb{R}^n$; $Y \in \mathbb{R}^{n \times m}$ is the output(s)
+$A \in \mathbb{R}^{m \times n}$ is the linear transformation
+
+Note: A contains the top $k$ eigenvalues, where the top of the matrix captures the most information
+
 ![[lda.png]]
 
 # Code

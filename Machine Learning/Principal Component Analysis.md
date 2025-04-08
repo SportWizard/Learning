@@ -15,12 +15,28 @@ The reason behind dimension reduction is to prevent over-fitting by reducing the
 The first PC is determined by maximizing the average distance between all the data projected on the current PC and the origin. The rest of the PCs also does the same but has to be orthogonal to all the existing PCs
 
 # Equation
+PCA transformation:
+- (Single data sample - vector):
 $$
-\text{PCA transformation: } y = Ax
+\vec{y} = A \vec{x}
 $$
+- (All data samples - matrix):
 $$
-\text{Inverse PCA transformation: } x = A^\intercal y
+Y = A X
 $$
+Inverse PCA transformation:
+- (Single data sample - vector):
+$$
+\vec{x} = A^\intercal \vec{y}
+$$
+- (All data samples - matrix):
+$$
+X = A^\intercal Y
+$$
+$\vec{x} \in \mathbb{R}^n$; $X \in \mathbb{R}^{n \times m}$ is the input(s)
+$\vec{y} \in \mathbb{R}^n$; $Y \in \mathbb{R}^{n \times m}$ is the output(s)
+$A \in \mathbb{R}^{m \times n}$ is the linear transformation
+
 Note: A contains the top $k$ eigenvalues, where the top of the matrix captures the most information
 
 ![[pca.png]]

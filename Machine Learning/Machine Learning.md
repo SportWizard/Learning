@@ -10,12 +10,9 @@ Fundamentals:
 - [[Simply vs Complex Models]]
 - [[Under-fitting vs Over-fitting]]
 - [[Bias-Variance Tradeoff]]
-- [[Backpropagation]]
 Feature extraction:
 - [[Principal Component Analysis]]
 - [[Linear discriminant analysis]]
-- [[Autoencoder]]
-- [[Bottleneck Feature extractor]]
 Types of learning:
 - [[Supervised Learning]]
 - [[Unsupervised Learning]]
@@ -37,6 +34,7 @@ Linear models:
 Non-linear models:
 - [[K-Nearest Neighbours]]
 Neural network:
-- [[Fully Connected Neural Network]]
-- [[Convolutional Neural Network]]
-- [[Transformer]]
+- [[Deep Learning]]
+
+# Fine-tuning tricks
+![[learning-rate-fine-tuning.png]]

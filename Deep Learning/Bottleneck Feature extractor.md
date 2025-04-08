@@ -1,5 +1,5 @@
 # What is bottleneck feature extractor
-Bottleneck feature extractor (BFE) is an architecture and technique used in [[Machine Learning]] that implements non-linear dimension reduction on data samples using neural network
+Bottleneck feature extractor (BFE) is an architecture and technique used in [[Deep Learning]] that implements non-linear dimension reduction on data samples using neural network
 # How it works?
 - The BFE is the encoder created using [[Fully Connected Neural Network]]), used to reduce the dimension of the data
 - Once the data's dimension has been reduce, it will be used as the input of a model created using [[Fully Connected Neural Network]] for prediction
