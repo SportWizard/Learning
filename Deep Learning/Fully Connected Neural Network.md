@@ -1,5 +1,5 @@
 # What is fully connected neural network?
-Fully connected neural network (FCNN), also known as multi-layer perceptron (MLP) is a concept and a architecture used in [[Deep Learning]]. The concept of FCNN is every neurons in the previous layer is connected to every neuron in the next layer. The architecture of FCNN is a layer of neuron taking inputs, then passes it to the hidden layers, and lastly to the output layer (Usually [[Softmax]] for multi-class)
+Fully connected neural network (FCNN), also known as multi-layer perceptron (MLP) is an architecture in [[Deep Learning]]. The architecture of FCNN is a layer of neuron taking inputs, then passes it to the hidden layers, and lastly to the output layer (Usually [[Softmax]] for multi-class), where every neurons in the previous layer is connected to every neuron in the next layer
 
 # What is neuron(s)?
 In [[Deep Learning]], a neuron is an equation taking the form of a linear equation (each $w_i x_i$ is a new dimension)
