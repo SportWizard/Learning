@@ -180,22 +180,22 @@ from tensorflow import keras
 # define the model structure using Keras
 model = keras.models.Sequential([
 	# Convolutional block
-    keras.layers.Conv2D(filters=32, kernel_size=3, activation="relu", padding="same", input_shape=[28, 28, 1]), # [height, width, channels]
-    keras.layers.Conv2D(filters=64, kernel_size=3, activation="relu", padding="same"),
-    keras.layers.Conv2D(filters=64, kernel_size=3, activation="relu", padding="same"),
-    keras.layers.MaxPooling2D(pool_size=2),
+	keras.layers.Conv2D(filters=32, kernel_size=3, activation="relu", padding="same", input_shape=[28, 28, 1]), # [height, width, channels]
+	keras.layers.Conv2D(filters=64, kernel_size=3, activation="relu", padding="same"),
+	keras.layers.Conv2D(filters=64, kernel_size=3, activation="relu", padding="same"),
+	keras.layers.MaxPooling2D(pool_size=2),
 
-    keras.layers.Flatten(), # Flatten into a 1 dimensioal vector
+	keras.layers.Flatten(), # Flatten into a 1 dimensioal vector
 
 	# FCNN
-    keras.layers.Dense(units=7744, activation='relu'),
-    keras.layers.Dense(units=128, activation='relu'),
-    keras.layers.Dense(units=10, activation='softmax'),
+	keras.layers.Dense(units=7744, activation="relu"),
+	keras.layers.Dense(units=128, activation="relu"),
+	keras.layers.Dense(units=10, activation="softmax"),
 ])
 
 # compile model by attaching loss/optimizer/metric components
 model.compile(loss="sparse_categorical_crossentropy", optimizer=keras.optimizers.SGD(learning_rate=3e-2), metrics=["accuracy"])
 
 # learning a model
-history = model.fit(X_train, y_train, epochs=10, validation_data=(X, y_test))
+history = model.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
 ```
