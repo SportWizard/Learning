@@ -99,10 +99,22 @@ Using the query matrix and key matrix, we could find which query and key have th
 $$
 A = \frac{Q^\intercal K}{\sqrt{d_k}}
 $$
+$$
+A =
+\begin{bmatrix}
+\frac{\vec{q}_1^\intercal \vec{k}_1}{\sqrt{d_k}} & \frac{\vec{q}_1^\intercal \vec{k}_2}{\sqrt{d_k}} & \cdots & \frac{\vec{q}_1^\intercal \vec{k}_T}{\sqrt{d_k}} \\
+\frac{\vec{q}_2^\intercal \vec{k}_1}{\sqrt{d_k}} & \frac{\vec{q}_2^\intercal \vec{k}_2}{\sqrt{d_k}} & \cdots & \frac{\vec{q}_2^\intercal \vec{k}_T}{\sqrt{d_k}} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\vec{q}_T^\intercal \vec{k}_1}{\sqrt{d_k}} & \frac{\vec{q}_T^\intercal \vec{k}_2}{\sqrt{d_k}} & \cdots & \frac{\vec{q}_T^\intercal \vec{k}_T}{\sqrt{d_k}}
+\end{bmatrix}
+$$
 $A \in \mathbb{R}^{T \times T}$ is the attention weight/score
-$Q \in \mathbb{R}^{l \times T}$ is the query matrix
+$Q \in \mathbb{R}^{l \times T}$; is the query matrix
 $K \in \mathbb{R}^{l \times T}$ is the query matrix
 $d_k = l \in \mathbb{R}$ normalizes the output for numerical stability
+
+$\vec{q}_i \in \mathbb{R}^l$ is a query
+$\vec{k}_i \in \mathbb{R}^l$ is a key
 
 **Why the dot product?**
 The [[Dot product]] tell us whether two vector are pointing relatively in the same, orthogonal, or in opposite direction
@@ -126,6 +138,8 @@ A =
 \begin{bmatrix}a_{T \; 1} & a_{T \; 2} & \cdots & a_{T \; T}\end{bmatrix}
 \end{bmatrix}
 $$
+$A \in \mathbb{R}^{T \times T}$ is the attention weight/score
+$a_{i \; j} \in \mathbb{R}$ is the attention weight
 
 To convert into probability distribution, [[Softmax]] is applied to each vector outputting a matrix of probability distribution, where each vector sums up to 1
 
@@ -138,6 +152,9 @@ $$
 \text{softmax}(\begin{bmatrix}a_{T \; 1} & a_{T \; 2} & \cdots & a_{T \; T}\end{bmatrix})
 \end{bmatrix}
 $$
+$A \in \mathbb{R}^{T \times T}$ is the attention weight/score matrix
+$a_{i \; j} \in \mathbb{R}$ is the attention weight/score
+
 where for $a_{i \; j}$, $i$ is the $q_i$ and $j$ is the $k_j$. (e.g. $a_{5 \; 3}$ is the attention weight/score of the 5th query with the 3rd key)
 
 ##### Causal attention and masking
@@ -152,33 +169,47 @@ Note: the image is a transpose of my equation
 To sum up the over contribution of all the token in the sequence (or sentence) to a token, we would multiple the corresponding probability with the values and sum it
 
 $$
-Z = V A
+Z = \text{softmax}(A) V^\intercal
 $$
+$$
+\text{softmax}(A) =
+\begin{bmatrix}
+\text{softmax}(\begin{bmatrix}a_{1 \; 1} & a_{1 \; 2} & \cdots & a_{1 \; T}\end{bmatrix}) \\
+\text{softmax}(\begin{bmatrix}a_{2 \; 1} & a_{2 \; 2} & \cdots & a_{2 \; T}\end{bmatrix}) \\
+\vdots \\
+\text{softmax}(\begin{bmatrix}a_{T \; 1} & a_{T \; 2} & \cdots & a_{T \; T}\end{bmatrix})
+\end{bmatrix}
+
+\begin{bmatrix}
+\vec{v}_1^\intercal \\ \vec{v}_2^\intercal \\ \vdots \\ \vec{v}_T^\intercal
+\end{bmatrix}
+$$
+
 $$
 Z =
 \begin{bmatrix}\vec{z}_1 & \vec{z}_2 & \cdots & \vec{z}_T\end{bmatrix} =
 
 \begin{bmatrix}
 \begin{bmatrix}
-v_{1 \; 1} a_{1 \; 1} + v_{1 \; 2} a_{2 \; 1} + \cdots + v_{1 \; T} a_{T \; 1}
+a'_{1 \; 1} v_{1 \; 1} + a'_{1 \; 2} v_{2 \; 1}+ \cdots + a'_{1 \; T} v_{T \; 1}
 \\
-v_{2 \; 1} a_{1 \; 1} + v_{2 \; 2} a_{2 \; 1} + \cdots + v_{2 \; T} a_{T \; 1}
+a'_{2 \; 1} v_{1 \; 1} + a'_{2 \; 2} v_{2 \; 1} + \cdots + a'_{2 \; T} v_{T \; 1}
 \\
 \vdots
 \\
-v_{o \; 1} a_{1 \; 1} + v_{o \; 2} a_{2 \; 1} + \cdots + v_{o \; T} a_{T \; 1}
+a'_{T \; 1} v_{1 \; 1} + a'_{T \; 2} v_{2 \; 1} + \cdots + a'_{T \; T} v_{T \; 1}
 \end{bmatrix}
 
 &
 
 \begin{bmatrix}
-v_{1 \; 1} a_{1 \; 2} + v_{1 \; 2} a_{2 \; 2} + \cdots + v_{1 \; T} a_{T \; 2}
+a'_{1 \; 1} v_{1 \; 2} + a'_{1 \; 2} v_{2 \; 2} + \cdots + a'_{1 \; T} v_{T \; 2}
 \\
-v_{2 \; 1} a_{1 \; 2} + v_{2 \; 2} a_{2 \; 2} + \cdots + v_{2 \; T} a_{T \; 2}
+a'_{2 \; 1} v_{1 \; 2} + a'_{2 \; 2} v_{2 \; 2} + \cdots + a'_{2 \; T} v_{T \; 2}
 \\
 \vdots
 \\
-v_{o \; 1} a_{1 \; 2} + v_{o \; 2} a_{2 \; 2} + \cdots + v_{o \; T} a_{T \; 2}
+a'_{T \; 1} v_{1 \; 2} + a'_{T \; 2} v_{2 \; 2} + \cdots + a'_{T \; T} v_{T \; 2}
 \end{bmatrix}
 
 &
@@ -188,20 +219,24 @@ v_{o \; 1} a_{1 \; 2} + v_{o \; 2} a_{2 \; 2} + \cdots + v_{o \; T} a_{T \; 2}
 &
 
 \begin{bmatrix}
-v_{1 \; 1} a_{1 \; T} + v_{1 \; 2} a_{2 \; T} + \cdots + v_{1 \; T} a_{T \; T}
+a'_{1 \; 1} v_{1 \; T} + a'_{1 \; 2} v_{2 \; T} + \cdots + a'_{1 \; T} v_{T \; o}
 \\
-v_{2 \; 1} a_{1 \; T} + v_{2 \; 2} a_{2 \; T} + \cdots + v_{2 \; T} a_{T \; T}
+a'_{2 \; 1} v_{1 \; T} + a'_{2 \; 2} v_{2 \; T} + \cdots + a'_{2 \; T} v_{T \; o}
 \\
 \vdots
 \\
-v_{o \; 1} a_{1 \; T} + v_{o \; 2} a_{2 \; T} + \cdots + v_{o \; T} a_{T \; T}
+a'_{T \; 1} v_{1 \; T} + a'_{T \; 2} v_{2 \; T} + \cdots + a'_{T \; T} v_{T \; o}
 \end{bmatrix}
 \end{bmatrix}
 $$
 $Z \in \mathbb{R}^{o \times T}$ is the attention head
 $\vec{z}_i \in \mathbb{R}^o$ is the attention for the embedded token, $x_i$
 $V \in \mathbb{R}^{o \times T}$ is the query matrix
-$A \in \mathbb{R}^{T \times T}$ is the attention weight/score
+$A \in \mathbb{R}^{T \times T}$ is the attention weight/score matrix
+
+$a_{i \; j} \in \mathbb{R}$ is the attention weight/score
+$a'_{i \; j} \in \mathbb{R}$ is the probability distribution of the attention weight/score
+$\vec{v} \in \mathbb{R}^o$ is a value
 
 ##### Enrich the embedded token
 The attention, $Z$, is then used to add the origin embedded token
@@ -277,11 +312,8 @@ Multi-head attention is allow for the model capture of more information. This is
 # Code
 ```python
 import math
-import os
-import time
 from dataclasses import dataclass
 import torch
-import numpy as np
 import torch.nn as nn
 from torch.nn import functional as F
 
@@ -308,7 +340,7 @@ class CausalSelfAttention(nn.Module):
 
         self.n_head = config.n_head
         self.n_embd = config.n_embd
-        self.register_buffer("mask", torch.tril(torch.ones(config.block_size, config.block_size)).transpose(0,1).view(1, 1, config.block_size, config.block_size)) # Mask the lower triangle of the square matrix by making it negative infinite. When softmax is applied, it will be zero
+        self.register_buffer("mask", torch.tril(torch.ones(config.block_size, config.block_size)).view(1, 1, config.block_size, config.block_size)) # Mask the upper right triangle of the square matrix by making it negative infinite. When softmax is applied, it will be zero
 
     def forward(self, x):
         B, T, C = x.size() # batch size, sequence length, embedding dimensionality (n_embd)
@@ -321,28 +353,30 @@ class CausalSelfAttention(nn.Module):
         # weight_k: how other tokens identify themselves. e.g. The key for "cat" might signal it’s a noun that can be referenced by pronouns like "it"
         # weight_v: what content the token provides. e.g. The value for "cat" encodes semantic features (e.g., animacy, noun type
 
-        # q: weight_q dot embedded tokens = q_i <- column vector representation of the token, where each asks the question "what token is most similar to me"
-        # k: weight_k dot embedded tokens = k_i <- column vector representation of the token, where each is a candidate that will be compared with q_i using dot product
-        # v: weight_v dot embedded tokens = v_i <- column vector representation of the token, where each will be mutliplied a corresponding attention weight (how similar it is) at position i and determining how much this token contributes/relevant to the result
         q, k ,v  = self.c_attn(x).split(self.n_embd, dim=2)
+
         # hs: number of attention head
         # T: number of queries, keys, and values
         # nh: dimension of queries, keys, and values (column vector)
-        k = k.view(B, T, C // self.n_head, self.n_head).transpose(1, 3) # (B, hs, nh, T)
+
+        # q: weight_q dot embedded tokens = q_i <- column vector representation of the token, where each asks the question "what token is most similar to me"
+        # k: weight_k dot embedded tokens = k_i <- column vector representation of the token, where each is a candidate that will be compared with q_i using dot product
+        # v: weight_v dot embedded tokens = v_i <- column vector representation of the token, where each will be mutliplied a corresponding attention weight (how similar it is) at position i and determining how much this token contributes/relevant to the result
         q = q.view(B, T, C // self.n_head, self.n_head).transpose(1, 3) # (B, hs, nh, T)
+        k = k.view(B, T, C // self.n_head, self.n_head).transpose(1, 3) # (B, hs, nh, T)
         v = v.view(B, T, C // self.n_head, self.n_head).transpose(1, 3) # (B, hs, nh, T)
 
         # attention_weight = softmax(q^T dot k / sqrt(d_k)), where 0 <= j <= number of token in the sequence and d_k is the number of dimension to represent the query and key
         # attention_weight is a matrix (can be thought of as vector containing vectors), where each vector contains probabilities of every token's similarity to itself
-        att = (q.transpose(-2, -1) @ k) * (1.0 / math.sqrt(q.size(-2)))
+        att = (q.transpose(-2, -1) @ k) * (1.0 / math.sqrt(q.size(-2))) # (B, hs, T, nh) x (B, hs, nh, T) -> # (B, hs, T, T)
         att = att.masked_fill(self.mask[:,:,:T,:T] == 0, float("-inf")) # Causal Mask: used to prevent future token from influencing the current prediction
-        att = F.softmax(att, dim=-2) # Row-wise softmax
+        att = F.softmax(att, dim=-1) # Row-wise softmax
 
         # y_i = sum(v_i * attention_weight_ij) <- scalar multiplication, then vector addition for the sum, where 0 <= j <= number of token's probabilities. e.g. y_i = sum(v_i * attention_weight_ij) = [0.5, 2.3, 1.3] * 0.3 + [0.3, 0.2, 0.5] * 0.64 + ...
         # The purpose of the sum is the merge all relevant words in the sequence and that will dynamically shape the current token at position i. This is known as context-aware
         # The output, y, is a matrix, where each vector is a context-aware (a token's representation that is dynamically shaped by all relevant words in the sequence)
-        y = v @ att  # (B, hs, nh, T) x (B, nh, T, T) -> (B, hs, nh, T)
-        y = y.transpose(1, 3).contiguous().view(B, T, C) # re-assemble all head outputs side by side
+        y = att @ v.transpose(-2, -1) # (B, nh, T, T) x (B, hs, T, nh) -> (B, hs, T, nh)
+        y = y.transpose(1, 2).transpose(2, 3).contiguous().view(B, T, C) # re-assemble all head outputs side by side - (B, T, nh, hs)
         # output projection
         y = self.c_proj(y)
         return y
