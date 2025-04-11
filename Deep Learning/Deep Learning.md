@@ -15,7 +15,6 @@ Feature extraction:
 Image classification:
 - [[Convolutional Neural Network]]
 Generative pre-trained transformer (GPT):
-- [[Attention]]
 - [[Transformer]]
 
 # Fine-tuning tricks

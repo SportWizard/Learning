@@ -1,16 +1,22 @@
 # What is convolutional neural network?
-Convolutional neural network (CNN) is an architecture in [[Deep Learning]] and it is widely used in computer vision and image processing. Some architecture that build on CNN are VGG, AlexNet, ResNet, UNet
+Convolutional neural network (CNN) is an architecture in [[Deep Learning]] widely used in computer vision and image processing. Some architectures that build on CNN are VGG, AlexNet, ResNet, and UNet
 
 ![[cnn.png]]
 
 # What problem is CNN used for?
 CNN is used in image classification, segmentation and generation
 
-# How does it work?
-CNN uses a combination of convolutional layer, max-pooling to extract feature maps, it is then using as input to train the [[Fully Connected Neural Network]]
-
 # Objective/loss function
 [[Cross Entropy Error]] (other objective function can also be used)
+
+# How does CNN work?
+CNN uses a combination of convolutional layer, max-pooling to extract feature maps, it is then passed as an input for a [[Fully Connected Neural Network]] make probability prediction using [[Softmax]]
+
+Steps:
+- Convolutional blocks
+	-  $n$ number of convolution layer with optional batch normalization
+	- Max-pooling
+- [[Fully Connected Neural Network]] with [[Softmax]] to generate output that ranks classes into a probability
 
 # Spatial dimension
 Spatial dimension are the axes that represent physical space (e.g., height, width, depth). These dimensions define how data is arranged in a geometric or grid-like layout, allowing algorithms to interpret spatial relationships
