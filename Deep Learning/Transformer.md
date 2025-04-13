@@ -109,7 +109,7 @@ A =
 \end{bmatrix}
 $$
 $A \in \mathbb{R}^{T \times T}$ is the attention weight/score
-$Q \in \mathbb{R}^{l \times T}$; is the query matrix
+$Q \in \mathbb{R}^{l \times T}$ is the query matrix
 $K \in \mathbb{R}^{l \times T}$ is the query matrix
 $d_k = l \in \mathbb{R}$ normalizes the output for numerical stability
 
